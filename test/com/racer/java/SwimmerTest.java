@@ -10,6 +10,8 @@ public class SwimmerTest {
 
     private Swimmer s;
     private int racerId = 123456;
+    private String name = "TestName";
+    private int age = 32;
     private String raceActivity = "Swimming";
 
     @Before
@@ -26,9 +28,15 @@ public class SwimmerTest {
     public void testConstructors(){
         assertNotNull("Default Runner could not be created", s);
 
-        Swimmer s2 = new Swimmer(racerId);
+        Swimmer s2 = new Swimmer(name, age, racerId);
         assertNotNull("Explicit Runner could not be created", s2);
-        assertEquals("RacerID not set correctly on R2"
+        assertEquals("Name not set correctly on s2"
+                , name
+                , s2.getName());
+        assertEquals("Age not set correctly on s2"
+                , age
+                , s2.getAge());
+        assertEquals("RacerID not set correctly on s2"
                 , racerId
                 , s2.getRacerId());
     }
@@ -42,22 +50,46 @@ public class SwimmerTest {
     }
 
     @Test
+    public void testGetSetName(){
+        s.setName(name);
+        assertEquals("The name could not be set as expected"
+                , name
+                , s.getName());
+    }
+
+    @Test
+    public void testGetSetAge(){
+        s.setAge(age);
+        assertEquals("The age could not be set as expected"
+                , age
+                , s.getAge());
+    }
+
+    @Test
     public void testPerformRaceActivity() throws Exception {
         String pra = s.performRaceActivity();
         assertTrue("performRaceActivity did not contain activity"
-                ,pra.contains(raceActivity));
+                , pra.contains(raceActivity));
     }
 
     @Test
     public void testToString() throws Exception {
         s.setRacerId(racerId);
-        String sts = s.toString();
+        s.setAge(age);
+        s.setName(name);
+        String rts = s.toString();
+
         assertTrue("toString does not contain racerId"
-                , sts.contains(String.format("%d", racerId)));
-        String sc = s.getClass().toString();
+                , rts.contains(String.format("%d", racerId)));
+        assertTrue("toString does not contain name"
+                , rts.contains(name));
+        assertTrue("toString does not contain age"
+                , rts.contains(String.format("%d", age)));
+
+        String rc = s.getClass().toString();
         assertTrue("toString does note contain class"
-                , sts.contains(sc));
+                , rts.contains(rc));
         assertTrue("toString does not contain performRaceActivity"
-                , sts.contains(raceActivity));
+                , rts.contains(raceActivity));
     }
 }

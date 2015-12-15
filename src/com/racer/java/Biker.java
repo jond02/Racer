@@ -1,14 +1,18 @@
 package com.racer.java;
 
-public class Biker implements RaceParticipant {
+public class Biker implements RaceParticipant, Person {
 
     private int _racerId;
+    private String _name;
+    private int _age;
 
     public Biker(){
         //default constructor
     }
 
-    public Biker(int racerId){
+    public Biker(String name, int age, int racerId){
+        _name = name;
+        _age = age;
         _racerId = racerId;
     }
 
@@ -23,14 +27,36 @@ public class Biker implements RaceParticipant {
     }
 
     @Override
+    public String getName() {
+        return _name;
+    }
+
+    @Override
+    public void setName(String name) {
+        _name = name;
+    }
+
+    @Override
+    public int getAge() {
+        return _age;
+    }
+
+    @Override
+    public void setAge(int age) {
+        _age = age;
+    }
+
+    @Override
     public String performRaceActivity() {
         return "Biking";
     }
 
     @Override
     public String toString(){
-        return String.format("%s]\tRacerID: %d\tActivity: %s\n"
+        return String.format("%s]\tName: %s\tAge: %d\tRacerID: %d\tActivity: %s\n"
                 , getClass()
+                , getName()
+                , getAge()
                 , getRacerId()
                 , performRaceActivity());
     }
