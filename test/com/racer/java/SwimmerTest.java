@@ -6,13 +6,20 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class SwimmerTest {
+public class SwimmerTest extends AthleteTest{
 
     private Swimmer s;
-    private int racerId = 123456;
-    private String name = "TestName";
-    private int age = 32;
     private String raceActivity = "Swimming";
+
+    @Override
+    public Athlete getAthlete() {
+        return new Swimmer();
+    }
+
+    @Override
+    public Athlete getExplicitAthlete() {
+        return new Swimmer(_name, _age, _racerId);
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -26,47 +33,11 @@ public class SwimmerTest {
 
     @Test
     public void testConstructors(){
-        assertNotNull("Default Swimmer could not be created", s);
-
-        Swimmer s2 = new Swimmer(name, age, racerId);
-        assertNotNull("Explicit Swimmer could not be created", s2);
-        assertEquals("Name not set correctly on s2"
-                , name
-                , s2.getName());
-        assertEquals("Age not set correctly on s2"
-                , age
-                , s2.getAge());
-        assertEquals("RacerID not set correctly on s2"
-                , racerId
-                , s2.getRacerId());
+        super.testConstructors();
     }
 
     @Test
-    public void testGetSetRacerId() throws Exception {
-        s.setRacerId(racerId);
-        assertEquals("The racerId could not be set as expected"
-                , racerId
-                , s.getRacerId());
-    }
-
-    @Test
-    public void testGetSetName(){
-        s.setName(name);
-        assertEquals("The name could not be set as expected"
-                , name
-                , s.getName());
-    }
-
-    @Test
-    public void testGetSetAge(){
-        s.setAge(age);
-        assertEquals("The age could not be set as expected"
-                , age
-                , s.getAge());
-    }
-
-    @Test
-    public void testPerformRaceActivity() throws Exception {
+    public void testPerformRaceActivity() {
         String pra = s.performRaceActivity();
         assertTrue("performRaceActivity did not contain activity"
                 , pra.contains(raceActivity));
@@ -74,17 +45,11 @@ public class SwimmerTest {
 
     @Test
     public void testToString() throws Exception {
-        s.setRacerId(racerId);
-        s.setAge(age);
-        s.setName(name);
+        super.testToString();
+        s.setRacerId(_racerId);
+        s.setAge(_age);
+        s.setName(_name);
         String rts = s.toString();
-
-        assertTrue("toString does not contain racerId"
-                , rts.contains(String.format("%d", racerId)));
-        assertTrue("toString does not contain name"
-                , rts.contains(name));
-        assertTrue("toString does not contain age"
-                , rts.contains(String.format("%d", age)));
 
         String rc = s.getClass().toString();
         assertTrue("toString does note contain class"
