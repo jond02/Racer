@@ -1,49 +1,24 @@
 package com.racer.java;
 
-public class Runner implements RaceParticipant, Person {
+public class Runner extends Athlete {
 
-    private int _racerId;
-    private String _name;
-    private int _age;
+    private String _shoeBrand;
 
     public Runner(){
         //default constructor
     }
 
-    public Runner(String name, int age, int racerId){
-        _name = name;
-        _age = age;
-        _racerId = racerId;
+    public Runner(String name, int age, int racerId, String brand){
+        super(name, age, racerId);
+        _shoeBrand = brand;
     }
 
-    @Override
-    public void setRacerId(int racerId) {
-        _racerId = racerId;
+    public String getShoeBrand() {
+        return _shoeBrand;
     }
 
-    @Override
-    public int getRacerId() {
-        return _racerId;
-    }
-
-    @Override
-    public String getName() {
-        return _name;
-    }
-
-    @Override
-    public void setName(String name) {
-        _name = name;
-    }
-
-    @Override
-    public int getAge() {
-        return _age;
-    }
-
-    @Override
-    public void setAge(int age) {
-        _age = age;
+    public void setShoeBrand(String shoeBrand) {
+        _shoeBrand = shoeBrand;
     }
 
     @Override
@@ -53,11 +28,10 @@ public class Runner implements RaceParticipant, Person {
 
     @Override
     public String toString(){
-        return String.format("%s]\tName: %s\tAge: %d\tRacerID: %d\tActivity: %s\n"
+        return String.format("%s %s]\tActivity: %s\tIs running with the shoes: %s\n"
+                , super.toString()
                 , getClass()
-                , getName()
-                , getAge()
-                , getRacerId()
-                , performRaceActivity());
+                , performRaceActivity()
+                , getShoeBrand());
     }
 }

@@ -26,10 +26,10 @@ public class SwimmerTest {
 
     @Test
     public void testConstructors(){
-        assertNotNull("Default Runner could not be created", s);
+        assertNotNull("Default Swimmer could not be created", s);
 
         Swimmer s2 = new Swimmer(name, age, racerId);
-        assertNotNull("Explicit Runner could not be created", s2);
+        assertNotNull("Explicit Swimmer could not be created", s2);
         assertEquals("Name not set correctly on s2"
                 , name
                 , s2.getName());

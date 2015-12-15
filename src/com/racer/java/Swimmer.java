@@ -1,49 +1,13 @@
 package com.racer.java;
 
-public class Swimmer implements RaceParticipant, Person {
-
-    private int _racerId;
-    private String _name;
-    private int _age;
+public class Swimmer extends Athlete {
 
     public Swimmer(){
         //default constructor
     }
 
     public Swimmer(String name, int age, int racerId){
-        _name = name;
-        _age = age;
-        _racerId = racerId;
-    }
-
-    @Override
-    public void setRacerId(int racerId) {
-        _racerId = racerId;
-    }
-
-    @Override
-    public int getRacerId() {
-        return _racerId;
-    }
-
-    @Override
-    public String getName() {
-        return _name;
-    }
-
-    @Override
-    public void setName(String name) {
-        _name = name;
-    }
-
-    @Override
-    public int getAge() {
-        return _age;
-    }
-
-    @Override
-    public void setAge(int age) {
-        _age = age;
+       super(name, age, racerId);
     }
 
     @Override
@@ -53,11 +17,9 @@ public class Swimmer implements RaceParticipant, Person {
 
     @Override
     public String toString(){
-        return String.format("%s]\tName: %s\tAge: %d\tRacerID: %d\tActivity: %s\n"
+        return String.format("%s %s]\tActivity: %s\n"
+                , super.toString()
                 , getClass()
-                , getName()
-                , getAge()
-                , getRacerId()
                 , performRaceActivity());
     }
 }

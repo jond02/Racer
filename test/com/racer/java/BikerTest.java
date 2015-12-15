@@ -13,6 +13,7 @@ public class BikerTest {
     private String name = "TestName";
     private int age = 32;
     private String raceActivity = "Biking";
+    private boolean usesClips = false;
 
     @Before
     public void setUp() throws Exception {
@@ -26,10 +27,10 @@ public class BikerTest {
 
     @Test
     public void testConstructors(){
-        assertNotNull("Default Runner could not be created", b);
+        assertNotNull("Default Biker could not be created", b);
 
-        Biker b2 = new Biker(name, age, racerId);
-        assertNotNull("Explicit Runner could not be created", b2);
+        Biker b2 = new Biker(name, age, racerId, usesClips);
+        assertNotNull("Explicit Biker could not be created", b2);
         assertEquals("Name not set correctly on b2"
                 , name
                 , b2.getName());
@@ -39,6 +40,9 @@ public class BikerTest {
         assertEquals("RacerID not set correctly on b2"
                 , racerId
                 , b2.getRacerId());
+        assertEquals("UsesClips not set correctly on b2"
+                , usesClips
+                , b2.getUsingClips());
     }
 
     @Test
@@ -66,6 +70,14 @@ public class BikerTest {
     }
 
     @Test
+    public void testGetSetUsingClips(){
+        b.setUsingClips(usesClips);
+        assertEquals("The clips could not be set as expected"
+                , usesClips
+                , b.getUsingClips());
+    }
+
+    @Test
     public void testPerformRaceActivity() throws Exception {
         String pra = b.performRaceActivity();
         assertTrue("performRaceActivity did not contain activity"
@@ -77,6 +89,7 @@ public class BikerTest {
         b.setRacerId(racerId);
         b.setAge(age);
         b.setName(name);
+        b.setUsingClips(usesClips);
         String rts = b.toString();
 
         assertTrue("toString does not contain racerId"
@@ -85,6 +98,8 @@ public class BikerTest {
                 , rts.contains(name));
         assertTrue("toString does not contain age"
                 , rts.contains(String.format("%d", age)));
+        assertTrue("toString does not contain clips"
+                , rts.contains(String.format("%b", usesClips)));
 
         String rc = b.getClass().toString();
         assertTrue("toString does note contain class"
